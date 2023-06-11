@@ -2,8 +2,11 @@ import React from 'react'
 
 const Todos = () => {
   return (
-    <div>
-      Todos
+    <div className='container'>
+      <h3>
+        ToDos List
+      </h3>
+      
     </div>
   )
 }
