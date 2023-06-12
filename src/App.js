@@ -5,6 +5,9 @@ import Header from "./components/Header";
 import Todos from "./components/Todos";
 
 function App() {
+  const onDelete = (todo) =>{
+    console.log("Function Called for todo",todo);
+  }
   let todos = [{
     sno : 1,
     title : "xyz",
@@ -20,7 +23,7 @@ function App() {
   }]
   return <>
   <Header title = "myToDoList"/>
-  <Todos todos = {todos}/>
+  <Todos todos = {todos} onDelete={onDelete}/>
   <Footer />
   </>;
   
