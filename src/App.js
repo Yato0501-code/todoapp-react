@@ -4,50 +4,55 @@ import AddTodo from "./components/AddTodo";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Todos from "./components/Todos";
-import React,{useState} from "react";
+import React, { useState, useEffect } from "react";
 
 function App() {
-  const onDelete = (todo) =>{
-    console.log("Function Called for todo",todo);
-
-    setTodos(todos.filter((e)=>{
-      return e!==todo;
-    }))
+  let initTodo;
+  if (localStorage.getItem("todos") === null) {
+    initTodo = [];
+  } else {
+    initTodo = JSON.parse(localStorage.getItem("todos"));
   }
 
-  const addTodo = (title,desc) => {
-    console.log("its working, adding",title,desc);
-    let sno = todos[todos.length - 1].sno +1;
-    const myTodo = {
-      sno : sno,
-      title : title,
-      desc : desc,
+  const onDelete = (todo) => {
+    console.log("Function Called for todo", todo);
+
+    setTodos(
+      todos.filter((e) => {
+        return e !== todo;
+      })
+    );
+    localStorage.setItem("todos", JSON.stringify(todos));
+  };
+
+  const addTodo = (title, desc) => {
+    console.log("its working, adding", title, desc);
+    let sno;
+    if (todos.length === 0) {
+      sno = 0;
+    } else {
+      sno = todos[todos.length - 1].sno + 1;
     }
-    setTodos([...todos,myTodo])
-  }
+    const myTodo = {
+      sno: sno,
+      title: title,
+      desc: desc,
+    };
+    setTodos([...todos, myTodo]);
+  };
 
-  const [todos , setTodos] = useState([
-  {
-    sno : 1,
-    title : "xyz",
-    desc : "xyz desc"
-  },{
-    sno : 2,
-    title : "abc",
-    desc : "abc desc"
-  },{
-    sno : 3,
-    title : "efg",
-    desc : "efg desc"
-  }
-])
-  return <>
-  <Header title = "myToDoList"/>
-  <AddTodo addTodo={addTodo}/>
-  <Todos todos = {todos} onDelete={onDelete}/>
-  <Footer />
-  </>;
-  
+  const [todos, setTodos] = useState(initTodo);
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
+  return (
+    <>
+      <Header title="myToDoList" />
+      <AddTodo addTodo={addTodo} />
+      <Todos todos={todos} onDelete={onDelete} />
+      <Footer />
+    </>
+  );
 }
 
 export default App;
