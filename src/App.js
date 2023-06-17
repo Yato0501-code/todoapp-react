@@ -4,7 +4,13 @@ import AddTodo from "./components/AddTodo";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Todos from "./components/Todos";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+} from "react-router-dom";
+import About from "./components/About";
 
 function App() {
   let initTodo;
@@ -26,7 +32,7 @@ function App() {
   };
 
   const addTodo = (title, desc) => {
-    console.log("its working, adding", title, desc);
+    // console.log("its working, adding", title, desc);
     let sno;
     if (todos.length === 0) {
       sno = 0;
@@ -47,10 +53,22 @@ function App() {
   }, [todos]);
   return (
     <>
+    <Router>
       <Header title="myToDoList" />
-      <AddTodo addTodo={addTodo} />
-      <Todos todos={todos} onDelete={onDelete} />
+      <Routes>
+        <Route exact path="/" element={
+            <Fragment>
+              <AddTodo addTodo={addTodo} />
+              <Todos todos={todos} onDelete={onDelete} />
+              </Fragment>
+        }
+         />
+      <Route exact path="/about" element={<About />}/>
+      </Routes>
+
+
       <Footer />
+    </Router>
     </>
   );
 }
