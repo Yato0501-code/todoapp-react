@@ -2,7 +2,7 @@ import React from "react";
 
 const About = () => {
   return (
-    <div>
+    <div className="container my-4">
       This is an about component.
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Quae libero

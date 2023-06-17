@@ -7,8 +7,8 @@ const Footer = () => {
   //   width:"100%",
   // }
   return (
-    <footer className='bg-dark text-light py-3'>
-      <p className='text-center'>Footer for the page</p>
+    <footer className='bg-dark text-light py-3 d-flex flex-column justify-content-between'>
+      <p className='text-center'>NOT FOOTER GUYS TRUST ME</p>
         
     </footer>
   )
